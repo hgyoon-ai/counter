@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카운터</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .counter-display {
+            font-size: 80px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 30px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .reset-btn {
+            background: #e74c3c;
+            margin-top: 20px;
+        }
+        
+        .reset-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 카운터</h1>
+        <div class="counter-display" id="counter">0</div>
+        <div>
+            <button onclick="increment()">+1 증가</button>
+        </div>
+        <div>
+            <button class="reset-btn" onclick="reset()">리셋</button>
+        </div>
+    </div>
+
+    <script>
+        // 로컬 스토리지에서 카운터 값 불러오기
+        let count = localStorage.getItem('counter') ? parseInt(localStorage.getItem('counter')) : 0;
+        
+        function updateDisplay() {
+            document.getElementById('counter').textContent = count;
+        }
+        
+        function increment() {
+            count++;
+            localStorage.setItem('counter', count);
+            updateDisplay();
+        }
+        
+        function reset() {
+            count = 0;
+            localStorage.setItem('counter', count);
+            updateDisplay();
+        }
+        
+        // 페이지 로드 시 초기값 표시
+        updateDisplay();
+    </script>
+</body>
+</html>
